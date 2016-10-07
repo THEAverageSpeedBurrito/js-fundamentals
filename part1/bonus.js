@@ -1,3 +1,4 @@
+"use strict";
 /*
 The purpose of this challenge is to be able to encode and decode a string using the Caesar cipher.
 
@@ -24,13 +25,14 @@ If by adding 13 to an ASCII code results in a number greater than 122 (i.e. "z")
 It'll take a few steps to solve this cipher. Have fun!
 */
 
+
 // Define a function named caesarShiftInt that takes one argument
 //    integer (number)
 //
 // If the integer is less than 97
 //    Throw an error with the message 'Error: integer too low'
 // If the integer is greater than 122
-//    Throw an error with the message 'Error: integer too low'
+//    Throw an error with the message 'Error: integer too high'
 // If the integer + 13 would be greater than 122, the ASCII code for 'z'
 //    Return an integer that is "wrapped" around
 // Otherwise
@@ -40,7 +42,17 @@ It'll take a few steps to solve this cipher. Have fun!
 //
 // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/throw
 function caesarShiftInt(integer) {
-  // YOUR CODE HERE
+  if(integer < 97) {
+    throw 'Error: integer too low';
+  }else if(integer > 122) {
+    throw 'Error: integer too high';
+  }else{
+    if(integer + 13 > 122) {
+      return 97 + (13 - (123 - integer));
+    }else{
+      return integer + 13;
+    }
+  }
 }
 
 // Define a function named caesarShiftChar that takes a one argument
@@ -57,7 +69,13 @@ function caesarShiftInt(integer) {
 //
 // See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCharCode
 
-
+function caesarShiftChar (char) {
+  char = char.toLowerCase();
+  if(char.charCodeAt(0) < 97 || char.charCodeAt(0) > 122){
+    return char;
+  }
+  return String.fromCharCode(caesarShiftInt(char.charCodeAt(0)));
+}
 
 
 // Define a function named encodeMessage that takes a one argument
@@ -68,7 +86,13 @@ function caesarShiftInt(integer) {
 //
 // HINT: You'll need a loop for this.
 
-
+function encodeMessage (message) {
+  var encoded = '';
+  for(var x = 0; x < message.length; x++) {
+    encoded += caesarShiftChar(message[x]);
+  }
+  return encoded;
+}
 
 
 // Define a function named decodeMessage that takes a one argument
@@ -78,3 +102,11 @@ function caesarShiftInt(integer) {
 // 'uryyb, gurer!', then return 'Hello, there!'.
 //
 // HINT: Is there a way to use the encodeMessage() function?
+
+function decodeMessage (message) {
+  var decoded = '';
+  for(var x = 0; x< message.length; x++) {
+    decoded += encodeMessage(message[x]);
+  }
+  return decoded;
+}
