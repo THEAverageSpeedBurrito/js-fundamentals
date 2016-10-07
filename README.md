@@ -1,3 +1,4 @@
+## Completed exercise uploaded to http://jsfundamentals.surge.sh/
 # JavaScript Fundamentals
 
 In this exercise, you'll need to solve a set of increasingly difficult puzzles aimed at helping you master the fundamentals of JavaScript. The exercise is split into two parts.
