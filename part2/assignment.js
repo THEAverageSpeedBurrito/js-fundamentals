@@ -226,14 +226,20 @@ function distance(p1, p2) {
 // the latest object to have the key will determine the value. For example,
 // given {c: 3} and {c: 4}, then return {c: 4}.
 
+
 function combine (obj1, obj2) {
+
   var keys = Object.keys(obj1);
+
   for(var x = 0; x < keys.length; x++) {
     var value = obj1[keys[x]];
+
     if(obj2[keys[x]] != undefined){
+
       if(obj1[keys[x]] > obj2[keys[x]]){
         obj2[keys[x]] = obj1[keys[x]];
       }
+
     }else{
       obj2[keys[x]] = obj1[keys[x]];
     }
@@ -246,7 +252,6 @@ function combine (obj1, obj2) {
 //
 // Return a new object where the keys and values of the argument are inverted.
 // For example, given { a: 1, b: 2 }, then return { '1': 'a', '2': 'b' }.
-
 function invert (obj) {
     var keys = Object.keys(obj);
     var newObj = {};
